@@ -1,7 +1,6 @@
 #include <stdio.h>
-#include <stdbool.h>
 
-int BinarySearch(int A[], int n, int x, bool searchFirst)
+int BinarySearch(int A[], int n, int x, int searchFirst)
 {
     int start = 0, end = n - 1, result = -1;
 
@@ -12,6 +11,7 @@ int BinarySearch(int A[], int n, int x, bool searchFirst)
         if (x == A[mid])
         {
             result = mid;
+
             if (searchFirst) end = mid - 1;
             else start = mid + 1;
         }
@@ -31,12 +31,16 @@ int main(void)
     printf("Enter a number : ");
     scanf("%d", &x);
 
-    int firstIndex = BinarySearch(A, n, x, true);
+    int firstIndex = BinarySearch(A, n, x, 1);
 
-    if (firstIndex == -1) printf("Number %d could not be found\n", x);
+    if (firstIndex == -1)
+    {
+        printf("Number %d could not be found\n", x);
+    }
     else
     {
-        int lastIndex = BinarySearch(A, n, x, false);
+        int lastIndex = BinarySearch(A, n, x, 0);
+
         printf("Count of %d is %d\n", x, lastIndex - firstIndex + 1);
     }
 
